@@ -1,9 +1,9 @@
 import { createContext, useState, useEffect, useCallback } from "react";
-import { findAll } from "../src/service/woman.service";
+import { findAll } from '../service/woman.service'
 
-export const WomanContext = createContext();
+const WomanContext = createContext();
 
-export const WomanContextProvider = ({ children }) => {
+const WomanProvider = ({ children }) => {
   const [women, setWomen] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -14,7 +14,7 @@ export const WomanContextProvider = ({ children }) => {
       setError(null);
       setIsLoading(true);
       const data = await findAll();
-      setUsers(data);
+      setWomen(data);
     } catch (err) {
       console.error(err);
       setError(err.message);
@@ -33,3 +33,5 @@ export const WomanContextProvider = ({ children }) => {
     </WomanContext.Provider>
   );
 };
+
+export { WomanContext, WomanProvider }
